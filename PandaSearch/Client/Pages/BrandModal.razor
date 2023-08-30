@@ -1,0 +1,14 @@
+﻿@using PandaSearch.Shared;
+@using PandaSearch.Shared.enums;
+<div class="DivBrandModal">
+    <div class="row">
+
+        <RadzenLabel Text="Name:"></RadzenLabel>
+        <RadzenTextBox Name="RtbName" @bind-Value=name></RadzenTextBox>
+    </div>
+    <div class="BotoneraModal">
+        <RadzenButton Text="Close" class="BotonDelete" Click="() => DialogService.Close(null)" />
+        <RadzenButton Text="Apply" class="BotonSecundario" Click="Apply" />
+    </div>
+
+</div>

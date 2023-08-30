@@ -1,0 +1,28 @@
+﻿@using PandaSearch.Shared;
+@using PandaSearch.Shared.enums;
+<div class="DivProductModal">
+    <div class="row">
+        <RadzenLabel Text="Name:"></RadzenLabel>
+        <RadzenTextBox Name="RtbName" @bind-Value=ProductFields.Name></RadzenTextBox>
+    </div>
+    <div class="row">
+        <RadzenLabel Text="Price:"></RadzenLabel>
+        <RadzenNumeric Name="RtbPrice" TValue="double" Min="0" Format="c" @bind-Value=ProductFields.Price></RadzenNumeric>
+    </div>
+    <div class="row">
+        <RadzenLabel Text="Clothe Type:" class="mb-2"></RadzenLabel>
+        <RadzenDropDown TValue="string" @bind-Value=SelectedClotheType Data="@EnumHelper.ObtenerDescripcionesDeEnum(typeof(ClotheType))" AllowFiltering=true TextProperty="Key" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Key" Placeholder="Select Clothe Type"></RadzenDropDown>
+    </div> 
+    <div class="row">
+        <RadzenLabel Text="Link:"></RadzenLabel>
+        <RadzenTextBox Name="Rtblink" @bind-Value="ProductFields.Link"></RadzenTextBox>
+    </div>
+    <div class="row">
+        <RadzenLabel Text="Brand:" class="mb-2"></RadzenLabel>
+        <RadzenDropDown TValue="Guid" @bind-Value=ProductFields.BrandId Data="@LsBrands" TextProperty="Name" AllowFiltering=true ValueProperty="Id" Placeholder="Select a Brand" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"></RadzenDropDown>
+    </div>
+    <div class="BotoneraModal">
+        <RadzenButton Text="Close" class="BotonDelete" Click="() =>DialogService.Close(null)" />
+        <RadzenButton Text="Apply" class="BotonSecundario" Click="Apply" />
+    </div>
+</div>

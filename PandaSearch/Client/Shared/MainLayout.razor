@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+<RadzenDialog />
+<RadzenNotification />
+<RadzenContextMenu />
+<RadzenTooltip />
+
+<div class="page">
+   <main>
+       
+        <div id="header" class="header"  style="display:none">
+            <a href="/"><img id="logo" src="favicon.png"/></a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+        <div id="footer" class="footer"  style="display:none">
+            <p>&#169; PandaSearch @DateTime.Now.Year</p>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,28 @@
+﻿@using PandaSearch.Shared;
+@using PandaSearch.Shared.enums;
+<div class="DivFilterModal">
+    <div class="precio">
+        <RadzenLabel Text="Price:" class="mb-2"></RadzenLabel>
+        <div class="barra">
+            <p>@selectedPricesValues.First()</p>
+            <RadzenSlider Range="true" TValue="IEnumerable<int>" Min="0" Max="@((decimal)Filter.maxPriceSlider)" Style="width:100%" @bind-Value=selectedPricesValues />
+            <p>@selectedPricesValues.Last()</p>
+        </div>
+    </div>
+    <div class="marcaTipoRopa">
+        <div class="marca">
+            <RadzenLabel Text="Brand:" class="mb-2"></RadzenLabel>
+            <RadzenDropDown TValue="List<Guid>" @bind-Value=selectedBrandId Data="LsBrands" Multiple=true AllowClear=true AllowFiltering=true AllowSelectAll=false Placeholder="Select Brand" TextProperty="Name" ValueProperty="Id">
+            </RadzenDropDown>
+        </div>
+        <div class="tipoRopa">
+            <RadzenLabel Text="Clothe Type:" class="mb-2"></RadzenLabel>
+            <RadzenDropDown @bind-Value=selectedClotheValues TValue="List<string>" Data="@EnumHelper.ObtenerDescripcionesDeEnum(typeof(ClotheType))" Multiple=true TextProperty="Key" ValueProperty="Key" AllowClear=true AllowSelectAll=false Placeholder="Select Clothe Type"></RadzenDropDown>
+        </div>
+
+    </div>
+    <div class="BotoneraModal">
+        @*<RadzenButton Text="Cerrar" class="BotonDelete" Click="DialogService.Close" />*@
+        <RadzenButton Text="Apply" class="BotonSecundario" Click="Apply" />
+        </div>
+        </div>
