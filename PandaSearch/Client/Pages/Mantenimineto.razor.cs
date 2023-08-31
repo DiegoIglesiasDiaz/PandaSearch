@@ -16,7 +16,7 @@ namespace PandaSearch.Client.Pages
         [Inject] BrandService BrandService { get; set; }
         [Inject] ProductService ProductService { get; set; }
 
-        public bool isLogIn = true;
+        public bool isLogIn = false;
         public string password;
         public List<Brand> LsBrands;
         public List<Product> LsProducts;
@@ -26,8 +26,8 @@ namespace PandaSearch.Client.Pages
         {
             await base.OnInitializedAsync();
 
-            LsProducts = await ProductService.GetAll();
-            LsBrands = await BrandService.GetAll();
+            //LsProducts = await ProductService.GetAll();
+            //LsBrands = await BrandService.GetAll();
 
         }
         public async Task CheckPassword()

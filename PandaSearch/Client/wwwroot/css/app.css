@@ -201,6 +201,7 @@ body .Body .Grid .row .product .product-image {
   display: flex !important;
   justify-content: center !important;
   margin-bottom: 1em;
+  margin-top: 0.5em;
 }
 body .Body .Grid .row .product .product-image .productImg {
   width: 150px;
