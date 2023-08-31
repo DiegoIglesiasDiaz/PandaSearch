@@ -12,58 +12,73 @@
         {
             <RadzenTabs RenderMode="TabRenderMode.Client" Style="Width:100%">
                 <Tabs>
-                <RadzenTabsItem Text="Product">
-                    <div class="BodyMant">
-                        <div class="BtnMant">
-                            <RadzenButton Text="Add Product" class="BotonSecundario" Click="() => ProductModal(null)"></RadzenButton>
+                    <RadzenTabsItem Text="Product">
+                        <div class="BodyMant">
+                            <div class="BtnMant">
+                                <RadzenButton Text="Add Product" class="BotonSecundario" Click="() => ProductModal(null)"></RadzenButton>
+                            </div>
+                            <div class="gridMantProduct">
+                                <RadzenDataGrid @ref=ProductGrid TItem="Product" Data=LsProducts AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="Product" Width="60px" Sortable="false" Filterable="false">
+                                            <Template Context="data">
+                                                <RadzenButton Icon="delete" class="BotonLapiz" Click="() => DeleteProduct(data)" />
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Product" Width="60px" Sortable="false" Filterable="false">
+                                            <Template Context="data">
+                                                <RadzenButton Icon="edit" Click="() => ProductModal(data)" class="BotonLapiz" />
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Product" Property="Name" Title="Name" />
+                                        <RadzenDataGridColumn TItem="Product" Property="Brand.Name" Title="Brand" />
+                                        <RadzenDataGridColumn TItem="Product" Property="PriceToString" Title="Price" />
+                                        <RadzenDataGridColumn TItem="Product" Sortable="false" Filterable="false" Title="Link">
+                                            <Template Context="data">
+                                                <a href="@data.Link">@data.Link</a>
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Product" Width="110px" Sortable="false" Filterable="false" Title="Photo">
+                                            <Template Context="data">
+                                                @if (data.imgbyte != null)
+                                                {
+                                                    <img src="data:image/png;base64,@Convert.ToBase64String(data.imgbyte)" alt="@data.BrandAndName" width="100" height="100" />
+                                                }else{
+                                                    <p>No Photo</p>
+                                                }
+
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                    </Columns>
+                                </RadzenDataGrid>
+                            </div>
                         </div>
-                        <div class="gridMantProduct">
-                            <RadzenDataGrid @ref=ProductGrid TItem="Product" Data=LsProducts AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
-                                <Columns>
-                                    <RadzenDataGridColumn TItem="Product" Width="60px" Sortable="false" Filterable="false">
-                                        <Template Context="data">
-                                            <RadzenButton Icon="delete" class="BotonLapiz" Click="() => DeleteProduct(data)" />
-                                        </Template>
-                                    </RadzenDataGridColumn>
-                                    <RadzenDataGridColumn TItem="Product" Width="60px" Sortable="false" Filterable="false">
-                                        <Template Context="data">
-                                            <RadzenButton Icon="edit" Click="() => ProductModal(data)" class="BotonLapiz" />
-                                        </Template>
-                                    </RadzenDataGridColumn>
-                                    <RadzenDataGridColumn TItem="Product" Property="Name" Title="Name" />
-                                    <RadzenDataGridColumn TItem="Product" Property="Brand.Name" Title="Brand" />
-                                    <RadzenDataGridColumn TItem="Product" Property="PriceToString" Title="Price" />
-                                    <RadzenDataGridColumn TItem="Product" Property="Link" Title="Link" Sortable="false" Filterable="false" />
-                                </Columns>
-                            </RadzenDataGrid>
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Brand">
+                        <div class="BodyMant">
+                            <div class="BtnMant">
+                                <RadzenButton Text="Add Brand" class="BotonSecundario" Click="() => BrandModal(null)"></RadzenButton>
+                            </div>
+                            <div class="gridMantBrand">
+                                <RadzenDataGrid @ref=BrandGrid TItem="Brand" Data=LsBrands AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
+                                    <Columns>
+                                        <RadzenDataGridColumn TItem="Brand" Width="60px" Sortable="false" Filterable="false">
+                                            <Template Context="data">
+                                                <RadzenButton Icon="delete" class="BotonLapiz" Click="() => DeleteBrand(data)" />
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Brand" Width="60px" Sortable="false" Filterable="false">
+                                            <Template Context="data">
+                                                <RadzenButton Icon="edit" Click="() => BrandModal(data)" class="BotonLapiz" />
+                                            </Template>
+                                        </RadzenDataGridColumn>
+                                        <RadzenDataGridColumn TItem="Brand" Property="Name" Title="Name" />
+                                    </Columns>
+                                </RadzenDataGrid>
+                            </div>
                         </div>
-                    </div>
-                </RadzenTabsItem>
-                <RadzenTabsItem Text="Brand">
-                    <div class="BodyMant">
-                        <div class="BtnMant">
-                            <RadzenButton Text="Add Brand" class="BotonSecundario" Click="() => BrandModal(null)"></RadzenButton>
-                        </div>
-                        <div class="gridMantBrand">
-                            <RadzenDataGrid @ref=BrandGrid TItem="Brand" Data=LsBrands AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
-                                <Columns>
-                                    <RadzenDataGridColumn TItem="Brand" Width="60px" Sortable="false" Filterable="false">
-                                        <Template Context="data">
-                                            <RadzenButton Icon="delete" class="BotonLapiz" Click="() => DeleteBrand(data)" />
-                                        </Template>
-                                    </RadzenDataGridColumn>
-                                    <RadzenDataGridColumn TItem="Brand" Width="60px" Sortable="false" Filterable="false">
-                                        <Template Context="data">
-                                            <RadzenButton Icon="edit" Click="() => BrandModal(data)" class="BotonLapiz" />
-                                        </Template>
-                                    </RadzenDataGridColumn>
-                                    <RadzenDataGridColumn TItem="Brand" Property="Name" Title="Name" />
-                                </Columns>
-                            </RadzenDataGrid>
-                        </div>
-                    </div>
-                </RadzenTabsItem>
-            </Tabs>
+                    </RadzenTabsItem>
+                </Tabs>
             </RadzenTabs>
         }
         else

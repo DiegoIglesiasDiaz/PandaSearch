@@ -23,6 +23,7 @@ namespace PandaSearch.Client.Pages
         {
             await base.OnInitializedAsync();
             await GridProducts();
+            Console.WriteLine(LsProducts.First().Name + " --- " + LsProducts.First().imgbyte != null ? "No es nulo" : "es nulo");
             orderValue = "NameAsc";;
         }
         public async Task ClearFilter()

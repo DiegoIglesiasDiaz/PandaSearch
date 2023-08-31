@@ -48,7 +48,7 @@ namespace PandaSearch.Client.Pages
             bool isNew = true;
             if (brand != null) isNew = false;
             var aux = await DialogService.OpenAsync<BrandModal>(isNew ? "Add Brand" : "Edit Brand", new Dictionary<string, object> { { "Brand", brand } }, new DialogOptions { ShowClose = true });
-            if (isNew && aux!= null)
+            if (isNew && aux != null)
             {
                 BrandGrid.InsertRow(aux);
                 LsBrands.Add(aux);
@@ -58,24 +58,40 @@ namespace PandaSearch.Client.Pages
         {
             bool isNew = true;
             if (product != null) isNew = false;
-            var aux = await DialogService.OpenAsync<ProductModal>(isNew ? "Add Product" : "Edit Product", new Dictionary<string, object> { { "Product", isNew ? new Product() :product } }, new DialogOptions { ShowClose = true });
+            var aux = await DialogService.OpenAsync<ProductModal>(isNew ? "Add Product" : "Edit Product", new Dictionary<string, object> { { "Product", isNew ? new Product() : product } }, new DialogOptions { ShowClose = true });
             if (isNew && aux != null)
             {
                 ProductGrid.InsertRow(aux);
                 LsProducts.Add(aux);
             }
-               
+            else if (!isNew && aux != null)
+            {
+
+                if (((Product)aux).imgbyte == null)
+                    await ProductService.DeleteImage(((Product)aux).Id.ToString());
+            }
+            else if (isNew && aux == null)
+            {
+
+                await ProductService.DeleteImage("new");
+            }
+            else if (!isNew && aux == null)
+            {
+                await ProductService.DeleteImage("update");
+            }
+
+
         }
         public async Task DeleteBrand(Brand brand)
         {
-            var result = await DialogService.OpenAsync<ConfirmModal>($"Do you want to delete {brand.Name}?",null);
-            if ( result != null && result == true)
+            var result = await DialogService.OpenAsync<ConfirmModal>($"Do you want to delete {brand.Name}?", null);
+            if (result != null && result == true)
             {
                 LsBrands.Remove(brand);
                 await BrandService.Delete(brand.Id);
                 await BrandGrid.Reload();
             }
-           
+
         }
         public async Task DeleteProduct(Product pro)
         {

@@ -4,11 +4,21 @@
     <a href="@Product.Link" class="image">
         <div class="product-grid">
             <div class="product-image">
-                <img class="productImg" src="favicon.png">
+                @if (Product.imgbyte != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Product.imgbyte)" alt="@Product.BrandAndName" width="170" height="170" />
+                }
+                else
+                {
+                    <img class="productImg" src="favicon.png" width="170" height="170">
+
+                }
+
+
             </div>
             <div class="product-content">
                 <div class="price">@Product.PriceToString</div>
-                <h5 class="brand">@(string.IsNullOrEmpty(Product.Brand.Name)? "" : Product.Brand.Name)</h5>
+                <h5 class="brand">@(string.IsNullOrEmpty(Product.Brand.Name) ? "" : Product.Brand.Name)</h5>
                 <h4 class="title">@Product.Name</h4>
             </div>
         </div>

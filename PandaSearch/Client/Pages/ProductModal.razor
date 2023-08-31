@@ -12,7 +12,7 @@
     <div class="row">
         <RadzenLabel Text="Clothe Type:" class="mb-2"></RadzenLabel>
         <RadzenDropDown TValue="string" @bind-Value=SelectedClotheType Data="@EnumHelper.ObtenerDescripcionesDeEnum(typeof(ClotheType))" AllowFiltering=true TextProperty="Key" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" ValueProperty="Key" Placeholder="Select Clothe Type"></RadzenDropDown>
-    </div> 
+    </div>
     <div class="row">
         <RadzenLabel Text="Link:"></RadzenLabel>
         <RadzenTextBox Name="Rtblink" @bind-Value="ProductFields.Link"></RadzenTextBox>
@@ -20,6 +20,13 @@
     <div class="row">
         <RadzenLabel Text="Brand:" class="mb-2"></RadzenLabel>
         <RadzenDropDown TValue="Guid" @bind-Value=ProductFields.BrandId Data="@LsBrands" TextProperty="Name" AllowFiltering=true ValueProperty="Id" Placeholder="Select a Brand" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"></RadzenDropDown>
+    </div>
+
+    <div class="UploadImgDiv">
+        <RadzenUpload @ref=radzenUpload ChooseText="Upload Product Image" Accept="images/*" Progress="(args)=> UploadMessage(args)" Style="background-color:none" Auto="true" Multiple="true" Icon="upload" Url="/Product/UploadFile" class="d-flex justify-content-center align-items-lg-start">
+            <RadzenUploadHeader Name="ID" Value=@(imageId!=Guid.Empty ? "update":"new") />
+        </RadzenUpload>
+        <RadzenLabel Text="Image Uploaded" Visible="ImageMssg"/>
     </div>
     <div class="BotoneraModal">
         <RadzenButton Text="Close" class="BotonDelete" Click="() =>DialogService.Close(null)" />

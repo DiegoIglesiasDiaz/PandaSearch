@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using PandaSearch.Client.Services;
 using PandaSearch.Shared;
 using PandaSearch.Shared.enums;
 using Radzen;
 using Radzen.Blazor;
+using System.ComponentModel;
 using System.Diagnostics.Tracing;
+using System.IO;
 using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
+using FileInfo = System.IO.FileInfo;
 
 namespace PandaSearch.Client.Pages
 {
@@ -19,7 +24,9 @@ namespace PandaSearch.Client.Pages
         public Product ProductFields = new Product();
         private List<Brand> LsBrands;
         private string SelectedClotheType;
-
+        private static Guid imageId;
+        private RadzenUpload radzenUpload;
+        private bool ImageMssg = false;
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
@@ -27,12 +34,11 @@ namespace PandaSearch.Client.Pages
             if (Product.Id != Guid.Empty)
             {
                 SelectedClotheType = EnumHelper.GetDescription(Product.ClotheType);
+                imageId = Product.Id;
                 fillFields();
             }
-
-
         }
-        public void Apply()
+        public async Task Apply()
         {
 
             if (!validation()) return;
@@ -41,15 +47,18 @@ namespace PandaSearch.Client.Pages
             Product.Brand = null;
             if (Product.Id != Guid.Empty)
             {
-                ProductService.UpdateProduct(Product);
+                await ProductService.UpdateProduct(Product);
             }
             else
             {
                 Product.Id = Guid.NewGuid();
-                ProductService.CreateProduct(Product);
+                await ProductService.CreateProduct(Product);
 
             }
-            Product.Brand = LsBrands.FirstOrDefault(x=>x.Id == Product.BrandId);
+
+            Product.Brand = LsBrands.FirstOrDefault(x => x.Id == Product.BrandId);
+            if (ImageMssg)
+                Product.imgbyte = await ProductService.GetImgById(Product.Id);
             DialogService.Close(Product);
         }
         public void fillFields()
@@ -64,20 +73,36 @@ namespace PandaSearch.Client.Pages
             if (string.IsNullOrWhiteSpace(ProductFields.Name) || string.IsNullOrWhiteSpace(ProductFields.Link) || Double.IsNaN(ProductFields.Price) ||
                  string.IsNullOrWhiteSpace(ProductFields.Name) || ProductFields.BrandId == Guid.Empty)
             {
-                NotificationService.Notify(NotificationSeverity.Error,"You must fill the fields.");
+                NotificationService.Notify(NotificationSeverity.Error, "You must fill the fields.");
                 return false;
             }
             else
             {
+                if ((!ImageMssg && Product.Id == Guid.Empty))
+                {
+                    NotificationService.Notify(NotificationSeverity.Error, "You must select an Image.");
+                    return false;
+                }
                 Product.Name = ProductFields.Name;
                 Product.Price = ProductFields.Price;
                 Product.Link = ProductFields.Link;
                 Product.BrandId = ProductFields.BrandId;
                 return true;
             }
-          
-           
-        }
 
+
+        }
+        public void UploadMessage(UploadProgressArgs e)
+        {
+            if (e.Progress == 100)
+            {
+                NotificationService.Notify(NotificationSeverity.Info, "Image Uploaded Succesfully");
+                ImageMssg = true;
+            }
+            else
+            {
+                ImageMssg = false;
+            }
+        }
     }
 }

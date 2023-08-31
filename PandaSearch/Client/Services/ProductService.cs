@@ -25,22 +25,30 @@ namespace PandaSearch.Client.Services
             return inf;
 
         }
-        public async void CreateProduct(Product product)
+        public async Task CreateProduct(Product product)
         {
 
             await _httpClientPublic.PostAsJsonAsync("/Product", product);
 
         }
-        public async void UpdateProduct(Product product)
+        public async Task UpdateProduct(Product product)
         {
-
             await _httpClientPublic.PostAsJsonAsync("/Product/Update", product);
-
         }
         public async Task DeleteProduct(Guid id)
         {
 
             await _httpClientPublic.GetAsync($"/Product/Delete/{id}");
+        }
+        public async Task DeleteImage(string status)
+        {
+
+            await _httpClientPublic.GetAsync($"/Product/DeleteImage/{status}");
+        }
+        public async Task<byte[]> GetImgById(Guid id)
+        {
+
+           return await _httpClientPublic.GetFromJsonAsync<byte[]>($"/Product/Img/{id}");
         }
     }
 }

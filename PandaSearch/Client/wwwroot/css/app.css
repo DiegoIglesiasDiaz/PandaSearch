@@ -12,6 +12,7 @@
   --rz-paginator-numeric-button-hover-color: white !important;
   --rz-slider-background-color: #bdbdbd !important;
   --rz-border-radius: 10px !important;
+  --rz-upload-button-bar-background-color: transparent !important;
 }
 
 body {
@@ -199,7 +200,7 @@ body .Body .Grid .row .product {
 body .Body .Grid .row .product .product-image {
   display: flex !important;
   justify-content: center !important;
-  margin: 1em;
+  margin-bottom: 1em;
 }
 body .Body .Grid .row .product .product-image .productImg {
   width: 150px;
@@ -325,6 +326,11 @@ body .DivProductModal .BotoneraModal {
 }
 body .DivProductModal .BotoneraModal button {
   margin: 0 1em;
+}
+body .DivProductModal .UploadImgDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 body .DivFilterModal {
   display: flex;
