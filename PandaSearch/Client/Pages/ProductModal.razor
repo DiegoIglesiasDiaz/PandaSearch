@@ -23,7 +23,7 @@
     </div>
 
     <div class="UploadImgDiv">
-        <RadzenUpload @ref=radzenUpload ChooseText="Upload Product Image" Accept="images/*" Progress="(args)=> UploadMessage(args)" Style="background-color:none" Auto="true" Multiple="true" Icon="upload" Url="/Product/UploadFile" class="d-flex justify-content-center align-items-lg-start">
+        <RadzenUpload @ref=radzenUpload ChooseText="Upload Product Image" Accept="image/*" Progress="(args)=> UploadMessage(args)" Style="background-color:none" Auto="true" Multiple="true" Icon="upload" Url="/Product/UploadFile" class="d-flex justify-content-center align-items-lg-start">
             <RadzenUploadHeader Name="ID" Value=@(imageId!=Guid.Empty ? "update":"new") />
         </RadzenUpload>
         <RadzenLabel Text="Image Uploaded" Visible="ImageMssg"/>
