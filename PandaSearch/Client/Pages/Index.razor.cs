@@ -15,6 +15,7 @@ namespace PandaSearch.Client.Pages
         Filter filter = new Filter();
         [Inject] DialogService DialogService { get; set; }
         [Inject] ProductService ProductService { get; set; }
+        [Inject] NotificationService NotificationService { get; set; }
         public string BuscarText { get; set; }
         public int numProducts = 8;
         public int Page = 1;
@@ -41,8 +42,12 @@ namespace PandaSearch.Client.Pages
         {
             filter.maxPriceSlider = (await getAllProducts()).OrderByDescending(p => p.Price).FirstOrDefault().Price;
             var aux  = await DialogService.OpenAsync<FilterModal>("",new Dictionary<string, object> { { "Filter",filter} },new DialogOptions { ShowClose=true});
-            if (aux != null & aux is Filter)
+            if (aux != null && aux is Filter)
+            {
                 filter = aux;
+                NotificationService.Notify(NotificationSeverity.Info, "Ok", "filter applied successfully.");
+            }
+                
            await GridProducts();
         }
         public async Task Paginator(bool isNext)

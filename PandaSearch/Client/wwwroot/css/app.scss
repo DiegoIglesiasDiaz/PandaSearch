@@ -399,10 +399,10 @@ body {
             }
         }
 
-       .UploadImgDiv{
-           display:flex;
-           flex-direction:column;
-           align-items:center;
+        .UploadImgDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 
@@ -511,6 +511,17 @@ body {
                 width: 20%;
                 margin: 2em 0;
             }
+        }
+    }
+
+    @media (max-width: 780px) {
+        .gridMantProduct {
+            width: 100% !important;
+        }
+
+        .gridMantBrand {
+            width: 100% !important;
+            margin: 0 0;
         }
     }
 

@@ -18,9 +18,9 @@
                                 <RadzenButton Text="Add Product" class="BotonSecundario" Click="() => ProductModal(null)"></RadzenButton>
                             </div>
                             <div class="gridMantProduct">
-                                <RadzenDataGrid @ref=ProductGrid TItem="Product" Data=LsProducts AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
+                                <RadzenDataGrid @ref=ProductGrid Responsive=false AllowPaging=true TItem="Product" Data=LsProducts AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
                                     <Columns>
-                                        <RadzenDataGridColumn TItem="Product" Width="60px" Sortable="false" Filterable="false">
+                                        <RadzenDataGridColumn TItem="Product"  Width="60px" Sortable="false" Filterable="false">
                                             <Template Context="data">
                                                 <RadzenButton Icon="delete" class="BotonLapiz" Click="() => DeleteProduct(data)" />
                                             </Template>
@@ -30,10 +30,10 @@
                                                 <RadzenButton Icon="edit" Click="() => ProductModal(data)" class="BotonLapiz" />
                                             </Template>
                                         </RadzenDataGridColumn>
-                                        <RadzenDataGridColumn TItem="Product" Property="Name" Title="Name" />
-                                        <RadzenDataGridColumn TItem="Product" Property="Brand.Name" Title="Brand" />
-                                        <RadzenDataGridColumn TItem="Product" Property="PriceToString" Title="Price" />
-                                        <RadzenDataGridColumn TItem="Product" Sortable="false" Filterable="false" Title="Link">
+                                        <RadzenDataGridColumn TItem="Product" MinWidth="200px" Property="Name" Title="Name" />
+                                        <RadzenDataGridColumn TItem="Product" MinWidth="150px" Property="Brand.Name" Title="Brand" />
+                                        <RadzenDataGridColumn TItem="Product" MinWidth="80px" Property="PriceToString" Title="Price" />
+                                        <RadzenDataGridColumn TItem="Product" MinWidth="150px" Sortable="false" Filterable="false" Title="Link">
                                             <Template Context="data">
                                                 <a href="@data.Link">@data.Link</a>
                                             </Template>
@@ -60,7 +60,7 @@
                                 <RadzenButton Text="Add Brand" class="BotonSecundario" Click="() => BrandModal(null)"></RadzenButton>
                             </div>
                             <div class="gridMantBrand">
-                                <RadzenDataGrid @ref=BrandGrid TItem="Brand" Data=LsBrands AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
+                                <RadzenDataGrid @ref=BrandGrid TItem="Brand" Data=LsBrands AllowPaging=true AllowSorting=true AllowFiltering=true FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" EmptyText="No hay Datos." PageSize="10">
                                     <Columns>
                                         <RadzenDataGridColumn TItem="Brand" Width="60px" Sortable="false" Filterable="false">
                                             <Template Context="data">

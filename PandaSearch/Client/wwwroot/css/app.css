@@ -423,6 +423,15 @@ body .mant .BodyMant .gridMantBrand {
   width: 20%;
   margin: 2em 0;
 }
+@media (max-width: 780px) {
+  body .gridMantProduct {
+    width: 100% !important;
+  }
+  body .gridMantBrand {
+    width: 100% !important;
+    margin: 0 0;
+  }
+}
 body .BotonLapiz {
   color: #bdbdbd !important;
   background: none !important;
