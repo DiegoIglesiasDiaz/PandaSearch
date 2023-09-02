@@ -32,7 +32,7 @@ namespace PandaSearch.Server.Controllers
             {
                 string aux = _context.Brands.Where(x => x.Id == item.BrandId).Select(x => x.Name).First();
                 item.Brand.Name = aux != null ? aux : "";
-                var img = files.FirstOrDefault(x => x.Contains(item.Id.ToString()));
+                var img = files.FirstOrDefault(x => x.ToLowerInvariant().Contains(item.Id.ToString().ToLower()));
                 if (img != null)
                 {
                     item.imgbyte =  System.IO.File.ReadAllBytes(img);
@@ -125,6 +125,36 @@ namespace PandaSearch.Server.Controllers
                 }
             }
         }
+
+        [HttpPost("UploadMultipleFile")]
+        [AllowAnonymous]
+        public async void UploadMultipleFiles ()
+        {
+            var files = Request.Form.Files;
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    var filePath = path + "/" +file.FileName;
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        try
+                        {
+                             file.CopyTo(stream);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                         stream.Close();
+
+
+                    }
+                }
+            }
+        }
+
         [HttpGet("DeleteImage/{status}")]
         [AllowAnonymous]
         public void DeleteImage(string status)

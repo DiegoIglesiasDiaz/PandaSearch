@@ -4,6 +4,7 @@ using PandaSearch.Shared;
 using PandaSearch.Shared.enums;
 using Radzen;
 using Radzen.Blazor;
+using System;
 using System.Diagnostics.Tracing;
 using System.Text.RegularExpressions;
 
@@ -11,6 +12,7 @@ namespace PandaSearch.Client.Pages
 {
     public partial class Mantenimineto
     {
+        [Inject] NotificationService NotificationService { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] DialogService DialogService { get; set; }
         [Inject] BrandService BrandService { get; set; }
@@ -103,6 +105,13 @@ namespace PandaSearch.Client.Pages
                 await ProductGrid.Reload();
             }
 
+        }
+        public void UploadMessage(UploadProgressArgs e)
+        {
+            if(e.Progress == 100)
+            {
+                NotificationService.Notify(NotificationSeverity.Success, "Ok", "Images Uploades Succesfully.");
+            }
         }
     }
 }
