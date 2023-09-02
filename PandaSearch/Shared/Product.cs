@@ -33,7 +33,7 @@ namespace PandaSearch.Shared
         public List<Image>? Images { get; set; }
 
         [NotMapped]
-        public string PriceToString { get { return Price.ToString("0.00") + "€"; } }
+        public string PriceToString { get { return Price.ToString("0.00") + "$"; } }
         [NotMapped]
         public string BrandAndName { get { return Brand != null ? Brand.Name + " " + Name : ""; } }
 

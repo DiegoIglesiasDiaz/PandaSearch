@@ -30,15 +30,15 @@ namespace PandaSearch.Server.Data
 
             //Foreign Key
 
-            modelBuilder.Entity<Product>()
-           .HasOne(p => p.Brand)
-           .WithMany(c => c.Product)
-           .HasForeignKey(p => p.BrandId);
+           // modelBuilder.Entity<Product>()
+           //.HasOne(p => p.Brand)
+           //.WithMany(c => c.Product)
+           //.HasForeignKey(p => p.BrandId);
 
-            modelBuilder.Entity<Image>()
-            .HasOne(p => p.Product)
-            .WithMany(c => c.Images)
-            .HasForeignKey(p => p.ProductId);
+            //modelBuilder.Entity<Image>()
+            //.HasOne(p => p.Product)
+            //.WithMany(c => c.Images)
+            //.HasForeignKey(p => p.ProductId);
 
 
         }

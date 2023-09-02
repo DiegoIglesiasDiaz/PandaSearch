@@ -17,7 +17,7 @@ namespace PandaSearch.Shared.enums
 
             var descripciones = new Dictionary<string, string>();
             var valoresEnum = Enum.GetValues(tipoEnum);
-
+            
             foreach (var valorEnum in valoresEnum)
             {
                 descripciones.Add(GetDescription((Enum)valorEnum),valorEnum.ToString());

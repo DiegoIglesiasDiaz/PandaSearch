@@ -29,12 +29,19 @@
         </div>
             <div class="Grid">
                 <div class="row">
+                @if (LsProducts.Count != 0)
+                {
                     @for (var i = 0; i < LsProducts.Count; i++)
                     {
                         <ProductComponent Product="LsProducts.ElementAt(i)" />
 
                     }
-                </div>
+                }
+                else
+                {
+                    <p>No hay Productos.</p>
+                }
+            </div>
                 @if (LsProducts.Count > numProducts)
                 {
                     <p>Page @Page</p>
