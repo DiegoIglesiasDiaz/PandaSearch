@@ -34,11 +34,11 @@ namespace PandaSearch.Shared.enums
         Shorts,
         Poles,
         Underwear,
-        Sweatshirts,
+        Hoodies,
         Shoes,
         Jewelry,
         Sunglasses,
-        Handbags,
+        Bags,
 
     }
 
