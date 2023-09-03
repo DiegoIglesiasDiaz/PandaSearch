@@ -6,11 +6,11 @@
             <div class="product-image">
                 @if (Product.imgbyte != null)
                 {
-                    <img src="data:image/png;base64,@Convert.ToBase64String(Product.imgbyte)" alt="@Product.BrandAndName" width="270" height="170"  />
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Product.imgbyte)" alt="@Product.BrandAndName" width="250" height="170"  />
                 }
                 else
                 {
-                    <img class="productImg" src="favicon.png" width="270" height="170">
+                    <img class="productImg" src="favicon.png" width="250" height="170">
 
                 }
 

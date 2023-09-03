@@ -363,10 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 PandaSearch/Server/uploads/
-/PandaSearch.sln
-/PandaSearch/Server/uploads/02E5CE04-FC93-EA80-3B9F-4D6EB166F38A.png
-/PandaSearch/Server/uploads/141BE1CB-9CBB-0E0B-2B13-CE8C88CBE7A3.png
-/PandaSearch/Server/uploads/1C3A7874-CC14-8918-5271-4A9D84176F60.png
-/PandaSearch/Server/uploads/1C512873-0071-AB44-1DAF-41C9F9B9E973.png
-/PandaSearch/Server/uploads/4907CF2F-B9F2-DDF2-DE07-75FEE11A84C4.png
-/PandaSearch/Server/uploads/A4B59997-A483-DC4F-4BC9-F3965FFDAA49.png
+PandaSearch/Server/uploads/*
