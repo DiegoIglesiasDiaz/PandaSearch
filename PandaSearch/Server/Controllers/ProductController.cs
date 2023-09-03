@@ -30,9 +30,9 @@ namespace PandaSearch.Server.Controllers
             var files = Directory.GetFiles(path);
             foreach (var item in lsProducts)
             {
-                string aux = _context.Brands.Where(x => x.Id == item.BrandId).Select(x => x.Name).First();
+                var aux = _context.Brands.ToList().FirstOrDefault(x => x.Id == item.BrandId).Name;
                 item.Brand.Name = aux != null ? aux : "";
-                var img = files.FirstOrDefault(x => x.ToLowerInvariant().Contains(item.Id.ToString().ToLower()));
+                var img = files.FirstOrDefault(x => x.ToLower().Contains(item.Id.ToString().ToLower()));
                 if (img != null)
                 {
                     item.imgbyte =  System.IO.File.ReadAllBytes(img);
@@ -99,7 +99,7 @@ namespace PandaSearch.Server.Controllers
         }
         [HttpPost("UploadFile")]
         [AllowAnonymous]
-        public async void Upload([FromHeader] string Id)
+        public void Upload([FromHeader] string Id)
         {
             var files = Request.Form.Files;
             string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
@@ -113,7 +113,7 @@ namespace PandaSearch.Server.Controllers
                     {
                         try
                         {
-                            await file.CopyToAsync(stream);
+                             file.CopyTo(stream);
                         }
                         catch (Exception ex)
                         {
@@ -128,7 +128,7 @@ namespace PandaSearch.Server.Controllers
 
         [HttpPost("UploadMultipleFile")]
         [AllowAnonymous]
-        public async void UploadMultipleFiles ()
+        public void UploadMultipleFiles ()
         {
             var files = Request.Form.Files;
             string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads");

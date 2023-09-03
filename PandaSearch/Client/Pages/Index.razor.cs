@@ -17,7 +17,7 @@ namespace PandaSearch.Client.Pages
         [Inject] ProductService ProductService { get; set; }
         [Inject] NotificationService NotificationService { get; set; }
         public string BuscarText { get; set; }
-        public int numProducts = 8;
+        public int numProducts = 9;
         public int Page = 1;
         public int MaxPage;
         protected override async Task OnInitializedAsync()
