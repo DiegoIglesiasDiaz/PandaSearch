@@ -23,7 +23,7 @@ namespace PandaSearch.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            await GridProducts();
+             GridProducts();
             Console.WriteLine(LsProducts.First().Name + " --- " + LsProducts.First().imgbyte != null ? "No es nulo" : "es nulo");
             orderValue = "NameAsc";;
         }
