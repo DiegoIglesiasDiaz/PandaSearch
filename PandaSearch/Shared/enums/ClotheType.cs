@@ -15,9 +15,9 @@ namespace PandaSearch.Shared.enums
         Coats,
         Accessories,
         Swimsuits,
-        scarves,
+        Scarves,
         Socks,
-        shirts,
+        Shirts,
         Tshirts,
         [Description("Football Shirts")]
         FootballShirts,

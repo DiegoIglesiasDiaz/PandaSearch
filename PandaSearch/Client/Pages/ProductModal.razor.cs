@@ -40,26 +40,33 @@ namespace PandaSearch.Client.Pages
         }
         public async Task Apply()
         {
-
-            if (!validation()) return;
-
-            Product.ClotheType = (ClotheType)Enum.Parse(typeof(ClotheType), SelectedClotheType);
-            Product.Brand = null;
-            if (Product.Id != Guid.Empty)
+            try
             {
-                await ProductService.UpdateProduct(Product);
+                if (!validation()) return;
+
+                Product.ClotheType = (ClotheType)Enum.Parse(typeof(ClotheType), SelectedClotheType);
+                Product.Brand = null;
+                if (Product.Id != Guid.Empty)
+                {
+                    await ProductService.UpdateProduct(Product);
+                }
+                else
+                {
+                    Product.Id = Guid.NewGuid();
+                    await ProductService.CreateProduct(Product);
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Product.Id = Guid.NewGuid();
-                await ProductService.CreateProduct(Product);
 
             }
-
             Product.Brand = LsBrands.FirstOrDefault(x => x.Id == Product.BrandId);
             if (ImageMssg)
                 Product.imgbyte = await ProductService.GetImgById(Product.Id);
             DialogService.Close(Product);
+
+
         }
         public void fillFields()
         {

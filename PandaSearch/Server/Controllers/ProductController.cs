@@ -64,6 +64,7 @@ namespace PandaSearch.Server.Controllers
 
                 _context.SaveChanges();
             }
+            
 
         }
         [AllowAnonymous]
@@ -99,7 +100,7 @@ namespace PandaSearch.Server.Controllers
         }
         [HttpPost("UploadFile")]
         [AllowAnonymous]
-        public void Upload([FromHeader] string Id)
+        public async Task Upload([FromHeader] string Id)
         {
             var files = Request.Form.Files;
             string path = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
@@ -113,7 +114,7 @@ namespace PandaSearch.Server.Controllers
                     {
                         try
                         {
-                             file.CopyTo(stream);
+                             await file.CopyToAsync(stream);
                         }
                         catch (Exception ex)
                         {
