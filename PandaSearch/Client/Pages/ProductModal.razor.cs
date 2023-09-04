@@ -85,11 +85,11 @@ namespace PandaSearch.Client.Pages
             }
             else
             {
-                if ((!ImageMssg && Product.Id == Guid.Empty))
-                {
-                    NotificationService.Notify(NotificationSeverity.Error, "You must select an Image.");
-                    return false;
-                }
+                //if ((!ImageMssg && Product.Id == Guid.Empty))
+                //{
+                //    NotificationService.Notify(NotificationSeverity.Error, "You must select an Image.");
+                //    return false;
+                //}
                 Product.Name = ProductFields.Name;
                 Product.Price = ProductFields.Price;
                 Product.Link = ProductFields.Link;
