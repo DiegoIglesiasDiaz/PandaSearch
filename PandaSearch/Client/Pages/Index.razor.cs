@@ -23,9 +23,9 @@ namespace PandaSearch.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-             GridProducts();
+            await GridProducts();
             Console.WriteLine(LsProducts.First().Name + " --- " + LsProducts.First().imgbyte != null ? "No es nulo" : "es nulo");
-            orderValue = "NameAsc";;
+            orderValue = "NameAsc"; ;
         }
         public async Task ClearFilter()
         {
@@ -41,14 +41,14 @@ namespace PandaSearch.Client.Pages
         public async Task OpenFilterModal()
         {
             filter.maxPriceSlider = (await getAllProducts()).OrderByDescending(p => p.Price).FirstOrDefault().Price;
-            var aux  = await DialogService.OpenAsync<FilterModal>("",new Dictionary<string, object> { { "Filter",filter} },new DialogOptions { ShowClose=true});
+            var aux = await DialogService.OpenAsync<FilterModal>("", new Dictionary<string, object> { { "Filter", filter } }, new DialogOptions { ShowClose = true });
             if (aux != null && aux is Filter)
             {
                 filter = aux;
                 NotificationService.Notify(NotificationSeverity.Info, "Ok", "filter applied successfully.");
             }
-                
-           await GridProducts();
+
+            await GridProducts();
         }
         public async Task Paginator(bool isNext)
         {
@@ -58,17 +58,17 @@ namespace PandaSearch.Client.Pages
                 Page--;
             if (Page <= 0)
                 Page = 1;
-           await  GridProducts();
+            await GridProducts();
 
         }
         public async Task GridProducts()
         {
-            LsProducts =  await getAllProducts();
+            LsProducts = await getAllProducts();
             LsProducts = LsProducts.OrderBy(x => x.Name).ToList();
             //Filtrar
             if (filter.ClotheTypes.Count > 0)
                 LsProducts = LsProducts.Where(x => filter.ClotheTypes.Contains(x.ClotheType)).ToList();
-            LsProducts = LsProducts.Where(x=> x.Price >= filter.minPrice).ToList();
+            LsProducts = LsProducts.Where(x => x.Price >= filter.minPrice).ToList();
             if (filter.LsBrandsId.Count > 0)
                 LsProducts = LsProducts.Where(x => filter.LsBrandsId.Contains(x.BrandId)).ToList();
             if (filter.maxPrice != -1)
