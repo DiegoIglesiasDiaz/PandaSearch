@@ -61,4 +61,4 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
-Server/appsettings.json filter=git-crypt diff=git-crypt
+PandaSearch/Server/appsettings.json filter=git-crypt diff=git-crypt
